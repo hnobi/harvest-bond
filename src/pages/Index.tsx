@@ -13,7 +13,7 @@ const Index = () => {
     <div className="bg-background text-foreground">
       <Navigation />
       <Hero />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <FaithCard />
       <ConnectionCard />
       <FeedbackSurvey />
