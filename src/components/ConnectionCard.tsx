@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogClose } from "@/components/ui/dialog";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,6 +25,7 @@ const ConnectionCard = () => {
   const [city, setCity] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const updateConnection = (index: number, field: 'name' | 'identifier', value: string) => {
     const updated = connections.map((conn, i) => 
@@ -94,12 +96,7 @@ const ConnectionCard = () => {
         setYourName("");
         setEmail("");
         setCity("");
-
-        toast({
-          title: "Connections Recorded! 🤝",
-          description: "We have received your connections. We'll follow up in 1 months to see how your relationships are developing.",
-           variant: "success",
-        });
+        setShowSuccess(true);
       } else {
         toast({
           title: "Submission Failed",
@@ -120,7 +117,26 @@ const ConnectionCard = () => {
 };
 
   return (
-    <section id="connections" className="py-20 bg-gradient-to-br from-background to-connection/5">
+    <>
+      <Dialog open={showSuccess} onOpenChange={setShowSuccess}>
+        <DialogContent className="bg-white border-0 shadow-2xl rounded-xl p-0 max-w-md">
+          <div className="flex flex-col items-center justify-center p-8">
+            <div className="bg-green-100 rounded-full p-4 mb-4">
+              <svg className="h-10 w-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2l4-4m5 2a9 9 0 11-18 0a9 9 0 0118 0z" /></svg>
+            </div>
+            <DialogTitle className="text-black text-2xl font-bold mb-2 text-center">Connections Recorded!</DialogTitle>
+            <DialogDescription className="text-black text-center mb-4">
+              We have received your connections.<br />We'll follow up in 1 month to see how your relationships are developing.
+            </DialogDescription>
+            <DialogClose asChild>
+              <Button className="mt-2 bg-green-600 hover:bg-green-700 text-white w-full" onClick={() => setShowSuccess(false)}>
+                Close
+              </Button>
+            </DialogClose>
+          </div>
+        </DialogContent>
+      </Dialog>
+      <section id="connections" className="py-20 bg-gradient-to-br from-background to-connection/5">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <div className="inline-flex items-center space-x-2 bg-connection/10 text-connection px-4 py-2 rounded-full text-sm font-medium mb-4">
@@ -279,6 +295,7 @@ const ConnectionCard = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 

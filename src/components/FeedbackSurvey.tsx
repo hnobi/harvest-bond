@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -27,6 +28,7 @@ const FeedbackSurvey = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,13 +72,7 @@ const FeedbackSurvey = () => {
           highlight: "",
           doBetter: ""
         });
-        toast({
-          title: "Feedback Submitted! 🎉",
-          description: "Thank you for your valuable feedback! You've been entered into our raffle draw.",
-          variant: "success",
-        });
-        // Scroll to next steps
-        document.getElementById('next-steps')?.scrollIntoView({ behavior: 'smooth' });
+        setShowSuccess(true);
       } else {
         toast({
           title: "Submission Failed",
@@ -100,7 +96,26 @@ const FeedbackSurvey = () => {
   };
 
   return (
-    <section id="feedback" className="py-20 bg-gradient-to-br from-muted/20 to-background">
+    <>
+      <Dialog open={showSuccess} onOpenChange={setShowSuccess}>
+        <DialogContent className="bg-white border-0 shadow-2xl rounded-xl p-0 max-w-md">
+          <div className="flex flex-col items-center justify-center p-8">
+            <div className="bg-green-100 rounded-full p-4 mb-4">
+              <svg className="h-10 w-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2l4-4m5 2a9 9 0 11-18 0a9 9 0 0118 0z" /></svg>
+            </div>
+            <DialogTitle className="text-green-700 text-2xl font-bold mb-2 text-center">Feedback Submitted!</DialogTitle>
+            <DialogDescription className="text-green-700 text-center mb-4">
+              Thank you for your valuable feedback!<br />You've been entered into our raffle draw.
+            </DialogDescription>
+            <DialogClose asChild>
+              <Button className="mt-2 bg-green-600 hover:bg-green-700 text-white w-full" onClick={() => setShowSuccess(false)}>
+                Close
+              </Button>
+            </DialogClose>
+          </div>
+        </DialogContent>
+      </Dialog>
+      <section id="feedback" className="py-20 bg-gradient-to-br from-muted/20 to-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
@@ -285,6 +300,7 @@ const FeedbackSurvey = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 

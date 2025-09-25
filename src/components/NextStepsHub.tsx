@@ -38,7 +38,7 @@ const NextStepsHub = () => {
         "Prayer support system",
         "Accountability Partners"
       ],
-      url: "https://forms.gle/uaogJ6h97WJ9A1e49"
+      url: "https://docs.google.com/forms/d/e/1FAIpQLSdHfoZzmkW6eeD7WWYWTiK9fC7lwnd4Qw5VXLhipN71GWqgyw/viewform?embedded=true"
     },
     {
       id: "s",
@@ -47,7 +47,7 @@ const NextStepsHub = () => {
       icon: Briefcase,
       color: "connection",
       benefits: [],
-      url: "https://forms.gle/uaogJ6h97WJ9A1e49"
+      url: "https://docs.google.com/forms/d/e/1FAIpQLSdHfoZzmkW6eeD7WWYWTiK9fC7lwnd4Qw5VXLhipN71GWqgyw/viewform?embedded=true"
     },
     {
       id: "nlp2026",
@@ -65,7 +65,7 @@ const NextStepsHub = () => {
       icon: Heart,
       color: "faith",
       benefits: [],
-      url: "https"
+      url: "https://www.nlpconference.uk/gbppayments"
     }
   ];
 
