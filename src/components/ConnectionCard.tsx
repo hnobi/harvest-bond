@@ -58,33 +58,25 @@ const ConnectionCard = () => {
 
     setIsLoading(true);
 
-    // Map form fields to sheet headers
-    const fieldMap = {
-      'Your NAME': yourName ?? '',
-      'EMAIL': email ?? '',
-      'city': city ?? '',
-      'Connection 1': connections[0]?.name ?? '',
-      'Brief Identifier 1': connections[0]?.identifier ?? '',
-      'Connection 2': connections[1]?.name ?? '',
-      'Brief Identifier 2': connections[1]?.identifier ?? '',
-      'Connection 3': connections[2]?.name ?? '',
-      'Brief Identifier 3': connections[2]?.identifier ?? '',
-    };
+    
 
-    const url = `https://script.google.com/macros/s/AKfycbwuQJYgl4Rz9R_iUkGbXPQpLoxYNgqmF0I0hQR5PHLoMPQ_FBO43wsPKxoURq2SoGpz/exec`;
+    const data = {
+      name: yourName,
+      email: email,
+      city: city,
+      connections: filledConnections 
+    }
+
+    const url = `https://church-5h1t.onrender.com/connection`; 
 
     try {
-      console.log("Sending request...");
-
       let res;
+      
       try {
-        const response = await axios.post(url, fieldMap, {
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
+        res = await axios.post(url, data, {
+          headers: { "Content-Type": "application/json" },
         });
-        res = response.data;
-        console.log("Axios response data:", res);
       } catch (axiosErr) {
-        // If server returns non-2xx, axios throws; try to get response data
         if (axiosErr.response && axiosErr.response.data) {
           res = axiosErr.response.data;
           console.error("Axios error response:", res);
@@ -93,7 +85,7 @@ const ConnectionCard = () => {
         }
       }
 
-      if (res && res.ok) {
+      if (res.data.status === 'success') {
         setConnections([
           { name: "", identifier: "" },
           { name: "", identifier: "" },
@@ -105,7 +97,8 @@ const ConnectionCard = () => {
 
         toast({
           title: "Connections Recorded! 🤝",
-          description: res?.message || "Your connections have been saved to Google Sheets! We'll follow up in 3 months to see how your relationships are developing.",
+          description: "We have received your connections. We'll follow up in 1 months to see how your relationships are developing.",
+           variant: "success",
         });
       } else {
         toast({

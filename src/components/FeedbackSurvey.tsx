@@ -31,7 +31,6 @@ const FeedbackSurvey = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Check if required fields are filled
     if (!feedback.hopeRevived || !feedback.madeConnection || !feedback.overallRating) {
       toast({
         title: "Please Complete Survey",
@@ -43,26 +42,57 @@ const FeedbackSurvey = () => {
 
     setIsLoading(true);
 
-    // Simulate submission
-    setTimeout(() => {
-      setIsLoading(false);
-      setFeedback({
-        hopeRevived: "",
-        madeConnection: "",
-        sessionsRelatable: "",
-        overallRating: "",
-        highlight: ""
-      });
-      console.log(feedback, 'Feedback submitted');
-      
-      toast({
-        title: "Feedback Submitted! 🎉",
-        description: "Thank you for your valuable feedback! You've been entered into our raffle draw.",
+    // Prepare body for API
+    const apiBody = {
+      eventHope: feedback.hopeRevived,
+      newConnection: feedback.madeConnection,
+      relatableSession: feedback.sessionsRelatable,
+      rating: Number(feedback.overallRating),
+      highlight: feedback.highlight,
+      doBetter: feedback.doBetter,
+    };
+
+    try {
+      const response = await fetch("https://church-5h1t.onrender.com/feedback", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(apiBody)
       });
 
-      // Scroll to next steps
-      document.getElementById('next-steps')?.scrollIntoView({ behavior: 'smooth' });
-    }, 1500);
+      if (response.ok) {
+        setFeedback({
+          hopeRevived: "",
+          madeConnection: "",
+          sessionsRelatable: "",
+          overallRating: "",
+          highlight: "",
+          doBetter: ""
+        });
+        toast({
+          title: "Feedback Submitted! 🎉",
+          description: "Thank you for your valuable feedback! You've been entered into our raffle draw.",
+          variant: "success",
+        });
+        // Scroll to next steps
+        document.getElementById('next-steps')?.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        toast({
+          title: "Submission Failed",
+          description: "There was a problem submitting your feedback. Please try again later.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Submission Failed",
+        description: "There was a problem submitting your feedback. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const updateFeedback = (field: keyof FeedbackData, value: string) => {
