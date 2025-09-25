@@ -47,7 +47,7 @@ const NextStepsHub = () => {
       icon: Briefcase,
       color: "connection",
       benefits: [],
-      url: "https://docs.google.com/forms/d/e/1FAIpQLSdHfoZzmkW6eeD7WWYWTiK9fC7lwnd4Qw5VXLhipN71GWqgyw/viewform?embedded=true"
+      url: "https://chat.whatsapp.com/LVYuCEJRjEa689bydboc9c"
     },
     {
       id: "nlp2026",
