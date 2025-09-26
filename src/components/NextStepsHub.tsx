@@ -159,7 +159,7 @@ const NextStepsHub = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
-                onClick={() => openLink("https://chat.whatsapp.com/Ki3bYH5mYk1d2FhM")}
+                onClick={() => openLink("https://chat.whatsapp.com/CNKyoPiyoCU8PPTmYrB1FA")}
                 className="bg-gradient-hero hover:shadow-glow transition-smooth">
                   <Heart className="h-4 w-4 mr-2" />
                   Join WhatsApp Group

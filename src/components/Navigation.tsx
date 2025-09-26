@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X, Heart, Calendar, Users, MessageSquare, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import harvestersLogo from "@/assets/harvesters-logo2.png";
 // Logo will be text-based
 
 const Navigation = () => {
@@ -22,7 +23,8 @@ const Navigation = () => {
           {/* Logo */}
           <div className="flex items-center space-x-3">
             <div className="bg-white px-3 py-1 rounded">
-              <span className="text-black font-bold text-sm">HARVESTERS</span>
+              {/* <span className="text-black font-bold text-sm">HARVESTERS</span> */}
+              <img src={harvestersLogo} alt="Harvest Bond Logo" className="h-8 w-auto" />
             </div>
             <div className="text-left">
               <div className="text-lg font-bold leading-tight">NLP Singles'</div>
