@@ -28,7 +28,7 @@ const NextStepsHub = () => {
     {
       id: "cell",
       title: "Join a NLP Small Group",
-      description: "Connect with like-minded believers in your area for fellowship, growth, and accountability",
+      description: "Connect with like-minded believers in your area for fellowship, growth, and accountability.",
       icon: Users,
       color: "connection",
       benefits: [
