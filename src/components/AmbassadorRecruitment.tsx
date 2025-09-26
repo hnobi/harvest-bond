@@ -1,3 +1,5 @@
+import merch1 from "../assets/1.jpeg";
+import merch2 from "../assets/2.jpeg";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -59,7 +61,8 @@ const AmbassadorRecruitment = () => {
   ];
 
   const availabilityOptions = [
-    "Social Media Promotion", ,
+  "Social Media Promotion",
+  // ...existing code...
     "Community Outreach",
     "Coach Ambassador"
   ];
@@ -249,7 +252,28 @@ const AmbassadorRecruitment = () => {
             </CardContent>
           </Card>
         </div>
+        <div className="mt-12 text-center text-sm text-muted-foreground">
+           {/* Merchandise Card */}
+      <div className="flex justify-center mt-8">
+        <a
+          href="https://www.nlpconference.uk/blank-1"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="no-underline"
+        >
+          <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center gap-4 hover:shadow-2xl transition-shadow cursor-pointer max-w-md">
+            <div className="flex gap-4">
+              <img src={merch1} alt="Merch 1" className="w-32 h-32 object-cover rounded-lg border" />
+              <img src={merch2} alt="Merch 2" className="w-32 h-32 object-cover rounded-lg border" />
+            </div>
+            <div className="mt-4 text-xl font-bold text-blue-700">Buy Merchandise</div>
+          </div>
+        </a>
       </div>
+          </div>
+      </div>
+
+     
     </section>
   );
 };
