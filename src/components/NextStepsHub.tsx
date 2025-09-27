@@ -65,7 +65,7 @@ const NextStepsHub = () => {
       icon: Heart,
       color: "faith",
       benefits: [],
-      url: "https://www.nlpconference.uk/gbppayments"
+      url: "https://docs.google.com/forms/d/e/1FAIpQLSdEx7pqzfUwZiYB06mw6ADl0Vot8JHK9T2-3pRn6-iMz5C0bg/viewform"
     }
   ];
 
